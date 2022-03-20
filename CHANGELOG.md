@@ -8,7 +8,10 @@
 
 -------------------------------------------------------------------------------
 
-# EspBatMon
+# bat-mon-firmware
+
+## 0.2.0 
+- send also total voltage
 
 ## 0.1.0 
 - publish ong GitHub

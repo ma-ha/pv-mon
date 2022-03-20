@@ -14,6 +14,7 @@
 #ifndef STASSID
 #define STASSID ">>>>WLAN-ID<<<<<"
 #define STAPSK  ">>>>WLAN-KEY<<<<"
+#define API_KEY "SOME-API-TOKEN"
 #endif
 
 char buf[50];
@@ -28,7 +29,7 @@ void setup() {
 
   Serial.println();
   Serial.println();
-  Serial.println( "EspBatMon 0.1.0" );
+  Serial.println( "EspBatMon 0.2.0" );
 
   WiFi.begin(STASSID, STAPSK);
 
@@ -48,19 +49,24 @@ void setup() {
 void loop() {
   digitalWrite( LED_BUILTIN, LOW ); 
   u1 = 0.0;
+  // read out each single cell
   for ( int cellNo = 0; cellNo < 8; cellNo++ ) {
-    float u2 = readVolt( cellNo );
+    u2 = readVolt( cellNo );
     sendDta( 1, ( cellNo + 1 ), ( u2 - u1 ) );
     u1 = u2;
   }
+  // send total voltage
+  sendDta( 1, 101, u2 );
 
   /* uncomment, if you need to monitor a 2nd 8s battery:
   u1 = 0.0;
   for ( int cellNo = 0; cellNo < 8; cellNo++ ) {
-    float u2 = readVolt( 8 + cellNo );
+    u2 = readVolt( 8 + cellNo );
     sendDta( 2, ( cellNo + 1 ), ( u2 - u1 ) );
     u1 = u2;
   }
+  // send total voltage
+  sendDta( 2, 101, u2 );
   */
   digitalWrite( LED_BUILTIN, HIGH );  
   delay(60000);
@@ -74,22 +80,20 @@ void sendDta( byte batNo, byte cellNo, float u ) {
     HTTPClient http;
   
     // configure API server and URL
-    http.begin( client, "http://" SERVER_IP "/pv/tst?key=SOME-API-TOKEN" ); 
+    http.begin( client, "http://" SERVER_IP "/pv/tst?key=" API_KEY ); 
     http.addHeader( "Content-Type", "application/json") ;
 
     Serial.print("[HTTP] POST... ");
     int httpCode = 0;
-    if ( u != 0.0 ) {
-      char floatStr[10];
-      dtostrf( u, 4, 2, floatStr );
+    char floatStr[10];
+    dtostrf( u, 4, 2, floatStr );
+    if ( cellNo == 101 ) { // total
+      sprintf(buf, "{\"src\":\"Bat%d\",\"fld\":\"U\",\"val\":%s}", batNo, floatStr );
+    } else { // single cell
       sprintf(buf, "{\"src\":\"Bat%d_%d\",\"fld\":\"U\",\"val\":%s}", batNo,cellNo, floatStr );
-      Serial.println(buf);
-      httpCode = http.POST( buf );
-    } else {
-      sprintf(buf, "{\"src\":\"Bat%d_%d\",\"fld\":\"U\",\"val\":0.001}", batNo, cellNo );
-      Serial.println(buf);
-      httpCode = http.POST( buf );
-    }
+    } 
+    Serial.println(buf);
+    httpCode = http.POST( buf );
   
     // httpCode will be negative on error
     if (httpCode > 0) {
