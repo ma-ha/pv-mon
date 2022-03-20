@@ -4,7 +4,8 @@ STAUT: WIP
 
 # Server Set Up
 
-The "server" (a PC is ok) need to run an "IoT API Server", where the sensors post readings data and an InfluxDB to store and analyze the data.
+The "server" (a PC is ok) need to run an "IoT API Server", 
+where the sensors post readings data and an InfluxDB to store and analyze the data.
 
 To make things as easy, I recommend to run the server and the DB as Docker containers.
 
@@ -84,6 +85,10 @@ Hardware is cheap and simple, based on:
 - an ESP8266 "D1 Mini" controller with WIFI
 - a CD74HC4067 as 16 channel (or 74HC4051 as 8 channel) multiplexer board
 - AMS1117 based step down power module for 3.3 V supply
+
+The sensor is designed to connect via a "8s JST XH " y-splitter cable between the
+battery and the BMS. 
+Alternatively connect Pin1 to "minus", Pin2 to the plus of 1st cell, Pin3 to the plus of 2nd cell and so on.
 
 ![Sensor PCB](https://github.com/ma-ha/pv-mon/blob/main/sensor16ADC/Sensor-PCB.png) 
 
