@@ -76,21 +76,33 @@ To send some test data execute:
     export NODE_ENV=DEV
     mocha test/testPostApiSvr.js
 
-# Device
+# Sensor Device
 
 The device measures up to 16 voltages and sends them to the IoT Server. 
 
-Hardware is based on 
-- an ESP8266 "D1 Mini" microcontroller with WIFI
-- a CD74HC4067 as 16 channel (or 74HC4051 as 8 channel) multiplexer
-- AMS1117 step down power module for 3.3 V supply
+Hardware is cheap and simple, based on:
+- an ESP8266 "D1 Mini" controller with WIFI
+- a CD74HC4067 as 16 channel (or 74HC4051 as 8 channel) multiplexer board
+- AMS1117 based step down power module for 3.3 V supply
 
+![Sensor PCB](https://github.com/ma-ha/pv-mon/blob/main/sensor16ADC/Sensor-PCB.png) 
 
-To upload the firmware to the "D1 Mini" via the Arduino IDE, 
-you must add `http://arduino.esp8266.com/stable/package_esp8266com_index.json` as 
+## Sensor Firmware
+
+To upload the [firmware](sensor16ADC/bat-mon-firmware/bat-mon-firmware.ino) 
+to the "D1 Mini" via the Arduino IDE, you must 
+add `http://arduino.esp8266.com/stable/package_esp8266com_index.json` as 
 "Additiona Boards Manager URLs" in the "File" > "Settings" menu. 
 Then install the newest version in "Tools" > "Board" > "Board Manager" the "esp8266".
 For me the "NodeMCU v0.9" board works fine.
+
+Then just 
+- connect the D1 Mini via USB 
+- double click the [bat-mon-firmware.ino](sensor16ADC/bat-mon-firmware/bat-mon-firmware.ino) 
+  to oben it in the Arduino IDE and 
+- click the "Upload" button to compile the code and program the module
+
+The sensor will read out the voltages once per minute and send them to the "IoT API Server".
 
 WARNING: If you use the Arduino IDE for NodeMCU, you will overwrite the LUA SDK. 
 If you want back the Lua SDK, use the “flasher” to re-install the firmware. 
