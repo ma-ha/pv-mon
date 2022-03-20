@@ -1,0 +1,21 @@
+{
+  "name": "iot-api-svr",
+  "version": "1.0.4",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@influxdata/influxdb-client": "^1.23.0",
+    "body-parser": "^1.19.2",
+    "config": "^3.3.7",
+    "express": "^4.17.3",
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "axios": "^0.26.1"
+  }
+}
