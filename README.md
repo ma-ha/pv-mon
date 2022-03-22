@@ -1,6 +1,14 @@
 # Monitor Photovoltaic (PV) System with LiFePO4 Batteries
 
-STAUT: WIP
+_STATUS: WIP, partially tested_
+
+LiFePO4 (aka LFP) batteries are known as safe and the voltages may not be dangerous for humans.
+
+**BUT ... WARNING: LFP batteries contain a lot of Energy! Shorts can cause enormous sparks, melt metal and cause fire.**
+
+Check your circuits twice for shorts (soldering problems)! 
+Be careful touching the circuit with metal tools (e.g. multimeter tips).
+Put the circuit in a safe enclosure!
 
 # Server Set Up
 

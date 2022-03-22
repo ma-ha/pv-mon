@@ -73,22 +73,9 @@ Text GLabel 4350 3350 3    50   Input ~ 0
 GND
 Text GLabel 3850 2850 0    50   Input ~ 0
 GND
-$Comp
-L Regulator_Linear:AMS1117CD-1.5 U3
-U 1 1 62369A95
-P 1500 3600
-F 0 "U3" H 1500 3842 50  0000 C CNN
-F 1 "AMS1117CD-1.5" H 1500 3751 50  0000 C CNN
-F 2 "AudioChannel:AMS1117" H 1500 3800 50  0001 C CNN
-F 3 "http://www.advanced-monolithic.com/pdf/ds1117.pdf" H 1600 3350 50  0001 C CNN
-	1    1500 3600
-	1    0    0    -1  
-$EndComp
-Text GLabel 1500 3900 3    50   Input ~ 0
+Text GLabel 1400 3500 0    50   Input ~ 0
 GND
-Text GLabel 1200 3600 0    50   Input ~ 0
-+6.4V
-Text GLabel 1800 3600 2    50   Output ~ 0
+Text GLabel 1400 3600 0    50   Output ~ 0
 3.3V
 $Comp
 L Device:R_Small R1
@@ -392,4 +379,26 @@ NoConn ~ 2500 1400
 NoConn ~ 2200 1800
 NoConn ~ 2200 2100
 NoConn ~ 2200 2200
+Text GLabel 1250 3300 0    50   Input ~ 0
++24V
+Wire Wire Line
+	1250 3300 1350 3300
+Wire Wire Line
+	1400 3400 1350 3400
+Wire Wire Line
+	1350 3400 1350 3300
+Connection ~ 1350 3300
+Wire Wire Line
+	1350 3300 1400 3300
+$Comp
+L AudioChannel-cache:Pololu-D24V3F3 U3
+U 1 1 623A75EE
+P 1550 3150
+F 0 "U3" H 2000 3050 50  0000 L CNN
+F 1 "Pololu-D24V3F3" H 1550 2600 50  0000 L CNN
+F 2 "AudioChannel:Pololu-D24V3F3" H 1550 3150 50  0001 C CNN
+F 3 "" H 1550 3150 50  0001 C CNN
+	1    1550 3150
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
