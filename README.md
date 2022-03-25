@@ -26,7 +26,7 @@ The device measures up to 16 voltages and sends them to the IoT Server.
 Hardware is cheap and simple, based on:
 - an ESP8266 "D1 Mini" controller with WIFI
 - a CD74HC4067 as 16 channel (or 74HC4051 as 8 channel) multiplexer board
-- AMS1117 based step down power module for 3.3 V supply
+- Pololu D36V6F3 Step-Down Voltage Regulator for 3.3 V supply
 
 The sensor is designed to connect via a "8s JST XH " y-splitter cable between the
 battery and the BMS. 
