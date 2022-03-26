@@ -11,6 +11,10 @@
 # bat-mon-firmware
 
 ## 0.2.0 
+- AD with 5x sampling
+- fixes
+
+## 0.2.0 
 - send also total voltage
 
 ## 0.1.0 
