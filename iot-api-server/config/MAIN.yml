@@ -1,7 +1,7 @@
 ORG: my-org
 BUCKET: pv
 
-INFLUX_URL: http://localhost:8086
+INFLUX_URL: http://influxdb:8086
 INFLUX_TOKEN: '>>>>YOUR INFLUX DB API TOKEN<<<<'
 
 API_KEY: 'SOME-API-TOKEN'

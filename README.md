@@ -128,7 +128,7 @@ Build and install the IoT API Server:
     docker rm iot-api-server
     docker run -d -e NODE_ENV=MAIN --link influxdb:influxdb  -p 8899:8899  --name iot-api-server  mh/iot-api-server
 
-To send some test data execute: 
+To send some test data execute (require `npm install -g mocha` once): 
 
     export NODE_ENV=DEV
     mocha test/testPostApiSvr.js
