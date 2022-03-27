@@ -6,7 +6,7 @@ Measure:
 3. 230 V output current 
 4. 230 V fallback current
 
-![Setup](https://github.com/ma-ha/pv-mon/blob/iot-setup.svg) 
+![Setup](https://github.com/ma-ha/pv-mon/blob/main/iot-setup.svg) 
 
 
 Send data via WiFi to local "IoT Server" and make data accessible in InfluxDB.
