@@ -6,6 +6,9 @@ Measure:
 3. 230 V output current 
 4. 230 V fallback current
 
+![Setup](https://github.com/ma-ha/pv-mon/blob/iot-setup.svg) 
+
+
 Send data via WiFi to local "IoT Server" and make data accessible in InfluxDB.
 
 _STATUS: WIP, partially tested_
@@ -57,7 +60,7 @@ You can download the flasher from their Github page https://github.com/nodemcu/n
 
 # Server Set Up
 
-The "server" (a PC is ok) need to run an "IoT API Server", 
+The "server" (a PC is ok) need to run an "[IoT API Server](iot-api-server/app.js)", 
 where the sensors post readings data and an InfluxDB to store and analyze the data.
 
 To make things as easy, I recommend to run the server and the DB as Docker containers.
@@ -92,7 +95,7 @@ Finally create or copy an API token for the API server, via "Data" manu and "API
 
 ## IoT API Server 
 
-The API server listens on 8899.
+The "[API Server](iot-api-server/app.js)" is a tiny JS app and listens on 8899.
 
 Devices can post JSON data to the endpoint 
 `http:/server-ip:8899/<bucket>/<data-type>?key=<api-key>`
