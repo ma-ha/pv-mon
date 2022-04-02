@@ -10,7 +10,10 @@
 
 # bat-mon-firmware
 
-## 0.2.0 
+## 0.4.0 
+- send battery charge percent 
+
+## 0.3.0 
 - AD with 5x sampling
 - fixes
 

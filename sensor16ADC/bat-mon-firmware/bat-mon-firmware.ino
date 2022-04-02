@@ -29,7 +29,7 @@ void setup() {
 
   Serial.println();
   Serial.println();
-  Serial.println( "EspBatMon 0.3.0" );
+  Serial.println( "EspBatMon 0.4.0" );
 
   WiFi.begin(STASSID, STAPSK);
 
@@ -67,6 +67,17 @@ void loop() {
   // send total voltage
   sendDta( 1, 101, u2 );
 
+
+  // send total voltage in percent
+  float uPct = 0;
+  if ( u2 > 16 ) {
+    // Max cell 3.75 V 
+    // Min cell 2.1 V  
+    // Max - Min = 1.65 V
+    uPct = ( u2 - 2.1*8.0 ) / ( 1.65*8.0 ) * 100;
+  }
+  sendDta( 1, 111, uPct );
+
 /*
   // uncomment, if you need to monitor a 2nd 8s battery:
   u1 = 0.0;
@@ -103,6 +114,8 @@ void sendDta( byte batNo, byte cellNo, float u ) {
     dtostrf( u, 4, 2, floatStr );
     if ( cellNo == 101 ) { // total
       sprintf(buf, "{\"src\":\"Bat%d\",\"fld\":\"U\",\"val\":%s}", batNo, floatStr );
+    } else if ( cellNo == 111 ) { // total pct
+      sprintf( buf, "{\"src\":\"Bat%d\",\"fld\":\"PCT\",\"val\":%s}", batNo, floatStr );
     } else { // single cell
       sprintf(buf, "{\"src\":\"Bat%d_%d\",\"fld\":\"U\",\"val\":%s}", batNo,cellNo, floatStr );
     } 
