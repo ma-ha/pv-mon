@@ -10,6 +10,9 @@
 
 # bat-mon-firmware
 
+## 0.5.0
+- Temperature sensor DS18B20
+
 ## 0.4.0 
 - send battery charge percent 
 

@@ -4,10 +4,10 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
-Title ""
-Date ""
-Rev ""
-Comp ""
+Title "PV Battery Monitoring Sensor"
+Date "2022-04-04"
+Rev "1.0"
+Comp "ma-ha"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -73,9 +73,9 @@ Text GLabel 4350 3350 3    50   Input ~ 0
 GND
 Text GLabel 3850 2850 0    50   Input ~ 0
 GND
-Text GLabel 900  3500 0    50   Input ~ 0
+Text GLabel 900  3350 0    50   Input ~ 0
 GND
-Text GLabel 1400 3600 0    50   Output ~ 0
+Text GLabel 1400 3450 0    50   Output ~ 0
 3.3V
 $Comp
 L Device:R_Small R1
@@ -341,32 +341,31 @@ NoConn ~ 4850 3050
 NoConn ~ 3000 1800
 NoConn ~ 3000 2300
 NoConn ~ 3000 2400
-NoConn ~ 3000 2500
 NoConn ~ 3000 2600
 NoConn ~ 2500 1400
 NoConn ~ 2200 1800
 NoConn ~ 2200 2100
 NoConn ~ 2200 2200
-Text GLabel 900  3300 0    50   Input ~ 0
+Text GLabel 900  3150 0    50   Input ~ 0
 +24V
 Wire Wire Line
-	900  3300 1000 3300
+	900  3150 1000 3150
 Wire Wire Line
-	1400 3400 1350 3400
+	1400 3250 1350 3250
 Wire Wire Line
-	1350 3400 1350 3300
-Connection ~ 1350 3300
+	1350 3250 1350 3150
+Connection ~ 1350 3150
 Wire Wire Line
-	1350 3300 1400 3300
+	1350 3150 1400 3150
 $Comp
 L AudioChannel-cache:Pololu-D24V3F3 U3
 U 1 1 623A75EE
-P 1550 3150
-F 0 "U3" H 2000 3050 50  0000 L CNN
-F 1 "Pololu-D24V3F3" H 1550 2600 50  0000 L CNN
-F 2 "AudioChannel:Pololu-D24V3F3" H 1550 3150 50  0001 C CNN
-F 3 "" H 1550 3150 50  0001 C CNN
-	1    1550 3150
+P 1550 3000
+F 0 "U3" H 2000 2900 50  0000 L CNN
+F 1 "Pololu-D24V3F3" H 1550 2450 50  0000 L CNN
+F 2 "AudioChannel:Pololu-D24V3F3" H 1550 3000 50  0001 C CNN
+F 3 "" H 1550 3000 50  0001 C CNN
+	1    1550 3000
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -415,25 +414,108 @@ Wire Wire Line
 	5600 2150 5600 2300
 Connection ~ 5600 2150
 Wire Wire Line
-	1400 3500 1000 3500
+	1400 3350 1000 3350
 $Comp
 L Device:CP1_Small C1
 U 1 1 62425038
-P 1000 3400
-F 0 "C1" H 1091 3446 50  0000 L CNN
-F 1 "33uF" H 1091 3355 50  0000 L CNN
-F 2 "Capacitor_THT:CP_Radial_D5.0mm_P2.50mm" H 1000 3400 50  0001 C CNN
-F 3 "~" H 1000 3400 50  0001 C CNN
-	1    1000 3400
+P 1000 3250
+F 0 "C1" H 1091 3296 50  0000 L CNN
+F 1 "33uF" H 1091 3205 50  0000 L CNN
+F 2 "Capacitor_THT:CP_Radial_D5.0mm_P2.50mm" H 1000 3250 50  0001 C CNN
+F 3 "~" H 1000 3250 50  0001 C CNN
+	1    1000 3250
 	1    0    0    -1  
 $EndComp
-Connection ~ 1000 3300
+Connection ~ 1000 3150
 Wire Wire Line
-	1000 3300 1350 3300
-Connection ~ 1000 3500
+	1000 3150 1350 3150
+Connection ~ 1000 3350
 Wire Wire Line
-	1000 3500 900  3500
+	1000 3350 900  3350
 Wire Wire Line
 	5700 2300 5700 2250
 Connection ~ 5700 2250
+$Comp
+L Sensor_Temperature:DS18B20 U4
+U 1 1 624B7EB1
+P 4300 4100
+F 0 "U4" H 4070 4146 50  0000 R CNN
+F 1 "DS18B20" H 4070 4055 50  0000 R CNN
+F 2 "" H 3300 3850 50  0001 C CNN
+F 3 "http://datasheets.maximintegrated.com/en/ds/DS18B20.pdf" H 4150 4350 50  0001 C CNN
+	1    4300 4100
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x03_Male J2
+U 1 1 624B8442
+P 3300 4100
+F 0 "J2" H 3450 3800 50  0000 R CNN
+F 1 "Conn_01x03_Male" H 3750 3900 50  0000 R CNN
+F 2 "Connector_JST:JST_EH_B3B-EH-A_1x03_P2.50mm_Vertical" H 3300 4100 50  0001 C CNN
+F 3 "~" H 3300 4100 50  0001 C CNN
+	1    3300 4100
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x03_Female J3
+U 1 1 624B8AFD
+P 3400 4100
+F 0 "J3" H 3292 3775 50  0000 C CNN
+F 1 "Conn_01x03_Female" H 3292 3866 50  0000 C CNN
+F 2 "" H 3400 4100 50  0001 C CNN
+F 3 "~" H 3400 4100 50  0001 C CNN
+	1    3400 4100
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3600 4200 3900 4200
+Wire Wire Line
+	3900 4200 3900 4400
+Wire Wire Line
+	3900 4400 4300 4400
+Wire Wire Line
+	4300 3800 3900 3800
+Wire Wire Line
+	3900 3800 3900 4000
+Wire Wire Line
+	3900 4000 3600 4000
+Wire Wire Line
+	3550 4100 3600 4100
+Connection ~ 3600 4100
+Wire Wire Line
+	3600 4100 4000 4100
+Text GLabel 3100 4200 0    50   Input ~ 0
+GND
+Text GLabel 2600 3800 0    50   Input ~ 0
+3.3V
+Text GLabel 3000 2500 2    50   Input ~ 0
+1Wire
+Text GLabel 2650 4100 0    50   Input ~ 0
+1Wire
+$Comp
+L Device:R R17
+U 1 1 624CAB9E
+P 2750 3950
+F 0 "R17" H 2820 3996 50  0000 L CNN
+F 1 "3k9" H 2820 3905 50  0000 L CNN
+F 2 "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P2.54mm_Vertical" V 2680 3950 50  0001 C CNN
+F 3 "~" H 2750 3950 50  0001 C CNN
+	1    2750 3950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2600 3800 2750 3800
+Wire Wire Line
+	3000 3800 3000 4000
+Wire Wire Line
+	3000 4000 3100 4000
+Connection ~ 2750 3800
+Wire Wire Line
+	2750 3800 3000 3800
+Wire Wire Line
+	3100 4100 2750 4100
+Connection ~ 2750 4100
+Wire Wire Line
+	2750 4100 2650 4100
 $EndSCHEMATC

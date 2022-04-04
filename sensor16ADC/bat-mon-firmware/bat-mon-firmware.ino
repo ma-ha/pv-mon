@@ -22,6 +22,15 @@ float u1 = 0.0;
 float u2 = 0.0; 
 
 // ----------------------------------------------------------------------------
+#include <OneWire.h>
+#include <DallasTemperature.h>
+
+// D7 -> 13
+#define ONE_WIRE_BUS 13 
+
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature DS18B20(&oneWire);
+// ----------------------------------------------------------------------------
 
 void setup() {
 
@@ -29,7 +38,7 @@ void setup() {
 
   Serial.println();
   Serial.println();
-  Serial.println( "EspBatMon 0.4.0" );
+  Serial.println( "EspBatMon 0.5.0" );
 
   WiFi.begin(STASSID, STAPSK);
 
@@ -44,11 +53,21 @@ void setup() {
 
   initSwtch();
   switchCh( 0 );
+
+  // init temperature sensor
+  DS18B20.begin();
 }
 
 // ----------------------------------------------------------------------------
 
 void loop() {
+  // read temperature
+  DS18B20.requestTemperatures();
+  float tempC = DS18B20.getTempCByIndex(0);
+  if( tempC != DEVICE_DISCONNECTED_C ) {
+    sendDta( 1, 121, tempC );
+  }
+
   u1 = 0.0;
   // read out each single cell
   for ( int cellNo = 0; cellNo < 8; cellNo++ ) {
@@ -78,20 +97,6 @@ void loop() {
   }
   sendDta( 1, 111, uPct );
 
-/*
-  // uncomment, if you need to monitor a 2nd 8s battery:
-  u1 = 0.0;
-  for ( int cellNo = 0; cellNo < 8; cellNo++ ) {
-    u2 = readVolt( 8 + cellNo );
-    sendDta( 2, ( cellNo + 1 ), u2 );
-    float ux = u2 - u1;
-    sendDta( 21, ( cellNo + 1 ), ux );
-    u1 = u2;
-  }
-  // send total voltage
-  sendDta( 2, 101, u2 );
-  */
-
   // switch off LED, which is P4
   digitalWrite( LED_BUILTIN, HIGH );  
   delay(60000);
@@ -116,6 +121,8 @@ void sendDta( byte batNo, byte cellNo, float u ) {
       sprintf(buf, "{\"src\":\"Bat%d\",\"fld\":\"U\",\"val\":%s}", batNo, floatStr );
     } else if ( cellNo == 111 ) { // total pct
       sprintf( buf, "{\"src\":\"Bat%d\",\"fld\":\"PCT\",\"val\":%s}", batNo, floatStr );
+    } else if ( cellNo == 121 ) { // temp
+      sprintf( buf, "{\"src\":\"Bat%d\",\"fld\":\"TEMP\",\"val\":%s}", batNo, floatStr );
     } else { // single cell
       sprintf(buf, "{\"src\":\"Bat%d_%d\",\"fld\":\"U\",\"val\":%s}", batNo,cellNo, floatStr );
     } 
